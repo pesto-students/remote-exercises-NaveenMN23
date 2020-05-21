@@ -1,5 +1,12 @@
 function longestWordInString(inputString) {
-  return inputString.split(" ").sort(function(currentSubString,nextSubString) {return nextSubString.length - currentSubString.length;})[0];
+  return inputString.split(" ").reduce(
+    (maxLengthWord,currentWord) => {
+      if(currentWord.length > maxLengthWord.length){
+        return currentWord;
+      }else{
+        return maxLengthWord;
+      }
+    },"");
 }
 
 export { longestWordInString };
