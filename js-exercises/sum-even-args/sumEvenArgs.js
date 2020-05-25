@@ -1,11 +1,11 @@
 const sumEvenArgs = (...args) => {
-  let sum = 0;
+  let sumOfEvenArgs = 0;
   for(const item of args){
     if(parseInt(item) % 2 === 0){
-      sum += parseInt(item);
+      sumOfEvenArgs += parseInt(item);
     }
   }
-  return sum;
+  return sumOfEvenArgs;
 };
 
 export { sumEvenArgs };
