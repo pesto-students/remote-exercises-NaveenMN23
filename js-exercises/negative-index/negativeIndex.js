@@ -2,18 +2,18 @@ const handler = {
   get(target, prop) {
     if (prop === "length") {
       return target.length;
-    }
-    if (prop === "toString") {
+    } else if (prop === "toString") {
       return function () {
         return target.toString();
       };
+    } else if (typeof prop !== "symbol") {
+      const index = Number(prop);
+      if (index < 0) {
+        const actualIndex = index + target.length;
+        return target[actualIndex];
+      }
+      return target[index];
     }
-    const index = Number(prop);
-    if (index < 0) {
-      const actualIndex = index + target.length;
-      return target[actualIndex];
-    }
-    return target[index];
   },
   set(target, prop, newVal) {
     const index = Number(prop);
@@ -28,7 +28,7 @@ const handler = {
 };
 const negativeIndex = (input) => {
   if (!Array.isArray(input)) {
-    throw new TypeError("/Only arrays are supported/");
+    throw new TypeError("Only arrays are supported");
   }
   const result = new Proxy(input, handler);
   return result;
